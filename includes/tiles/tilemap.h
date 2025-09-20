@@ -8,10 +8,9 @@ using ptr = std::unique_ptr<Tile>;
 
 class TileMap {
 	public:
-		TileMap(int w, int h, SDL_Renderer* renderer);
+		TileMap(int w, int h);
 		void Render();
 
 		std::vector<std::vector<ptr>> tile;
 	private:
-		SDL_Renderer* renderer;
 };

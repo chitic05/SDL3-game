@@ -1,9 +1,8 @@
 #include "tiles/tile.h"
 
-Tile::Tile(std::string texture_path, SDL_Renderer* renderer) 
-	: renderer(renderer)
+Tile::Tile(std::string texture_path) 
 {
-	texture = LoadTexturePNG(texture_path, renderer);
+	texture = LoadTexturePNG(texture_path);
 }
 
 Tile::~Tile() {

@@ -1,18 +1,17 @@
 #include "levels/level.h"
 #include <iostream>
-Level::Level(const std::string& name, SDL_Renderer* renderer)
-	: levelName(name), renderer(renderer)
+Level::Level(const std::string& name)
+	: levelName(name)
 {
-
+	levelFile = LoadJSON("./res/levels/" + levelName + ".json");
 }
 
 void Level::Load(){  
 
 	//Delete any object that we don't want preloaded from another level
 	player.reset();
+
 	//Start Loading
-	levelFile = LoadJSON("./res/levels/" + levelName + ".json");
-	//when i acces this values to use levelFile.contains
 	//LOADING ALL THE OBJECTS FROM THE FILE
 
 	player = loadPlayer(levelFile);
@@ -28,9 +27,7 @@ std::unique_ptr<Player> Level::loadPlayer(const nlohmann::json& levelFile){
 
 			return std::make_unique<Player>( Vector2<float>(x, y), // pos
 											 Vector2<float>(100, 100), // size
-											 100, // speed
-											 this->renderer			//I NEED TO PASS THIS
-											);
+											 100); // speed 
 		}
 	} 
 	return nullptr;

@@ -18,7 +18,7 @@ nlohmann::json LoadJSON(const std::string& filePath){
     return js;
 }
 
-SDL_Texture* LoadTexturePNG(const std::string& filePath, SDL_Renderer* renderer)
+SDL_Texture* LoadTexturePNG(const std::string& filePath)
 {
     int w, h, pitch;
     unsigned char* pixels = stbi_load(filePath.c_str(), &w, &h, &pitch, STBI_rgb_alpha);
@@ -38,7 +38,7 @@ SDL_Texture* LoadTexturePNG(const std::string& filePath, SDL_Renderer* renderer)
         throw std::runtime_error("Failed to create SDL_Surface");
     }
 
-    SDL_Texture* rawTexture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_Texture* rawTexture = SDL_CreateTextureFromSurface(RendererManager::getRenderer(), surface);
 
     // Cleanup
     SDL_DestroySurface(surface);

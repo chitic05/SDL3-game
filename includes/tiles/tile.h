@@ -6,10 +6,12 @@
 
 class Tile {
 	public:
-		Tile(std::string texture_path, SDL_Renderer* renderer);
+		Tile(std::string texture_path);
 		~Tile();
 
-	private:
+	protected:
 		SDL_Texture* texture;
-		SDL_Renderer* renderer;
+
+		bool collidable = false;
+		
 };

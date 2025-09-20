@@ -1,10 +1,10 @@
 #include "entities/player.h"
 #include <iostream>
 
-Player::Player(const Vector2<float>& position, const Vector2<float>& size, float speed, SDL_Renderer* renderer)
-	: Entity(position, size, speed, renderer)
+Player::Player(const Vector2<float>& position, const Vector2<float>& size, float speed)
+	: Entity(position, size, speed)
 { 
-	texture = LoadTexturePNG(ResourceManager::GetTexturePath("JimCarrey"), this->renderer);
+	texture = LoadTexturePNG(ResourceManager::GetTexturePath("JimCarrey"));
 }
 
 void Player::Input(const bool* keyboardState){
@@ -30,6 +30,6 @@ void Player::Update(const double& deltaTime){
 }
 
 void Player::Render(){
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-	SDL_RenderTexture(renderer, texture, nullptr, &hitbox);// WRONG
+	SDL_SetRenderDrawColor(RendererManager::getRenderer(), 255, 0, 0, 255);
+	SDL_RenderTexture(RendererManager::getRenderer(), texture, nullptr, &hitbox);// WRONG
 }

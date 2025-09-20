@@ -1,5 +1,7 @@
 #pragma once
 
+#include "extras/renderer_manager.h"
+
 #include "nlohmann/json.hpp"
 #include "stb_image.h"
 #include <SDL3/SDL.h>
@@ -9,4 +11,4 @@
 
 nlohmann::json LoadJSON(const std::string& filePath);
 
-SDL_Texture* LoadTexturePNG(const std::string& filePath, SDL_Renderer* renderer);
+SDL_Texture* LoadTexturePNG(const std::string& filePath);

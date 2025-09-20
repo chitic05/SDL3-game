@@ -1,7 +1,7 @@
 #include "SDL3/SDL.h"
 #include <iostream>
 #include "levels/level_manager.h"
-
+#include "extras/renderer_manager.h"
 
 class SDLApp {
 public:
@@ -21,20 +21,13 @@ public:
             std::exit(1);
         }
 
-        renderer = SDL_CreateRenderer(window, nullptr);
-        if (!renderer) {
-            std::cerr << "Renderer creation failed: " << SDL_GetError() << std::endl;
-            SDL_DestroyWindow(window);
-            SDL_Quit();
-            std::exit(1);
-        }
-        LevelManager::setRenderer(renderer);
+        RendererManager::Init(window);
        // SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
     }
 
     // --- DESTROY ---
     ~SDLApp() {
-        SDL_DestroyRenderer(renderer);
+        RendererManager::Destroy();
         SDL_DestroyWindow(window);
         SDL_Quit();
     }
@@ -75,12 +68,12 @@ public:
 
             LevelManager::currentLevel->Update(deltaTime);
            // --- Rendering ---
-            SDL_SetRenderDrawColor(renderer, 100, 149, 237, 255); // Cornflower blue
-            SDL_RenderClear(renderer);
+            SDL_SetRenderDrawColor(RendererManager::getRenderer(), 100, 149, 237, 255); // Cornflower blue
+            SDL_RenderClear(RendererManager::getRenderer());
            
             LevelManager::currentLevel->Render();
 
-            SDL_RenderPresent(renderer);
+            SDL_RenderPresent(RendererManager::getRenderer());
 
             // --- Frame timing ---
             double frameTime = static_cast<double>(SDL_GetPerformanceCounter() - now) / SDL_GetPerformanceFrequency();/*divide the ticks to the tick frequency to obtain how many second it

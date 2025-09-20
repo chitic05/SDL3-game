@@ -3,13 +3,15 @@
 #include "extras/custom_math.hpp"
 #include "extras/custom_sdl.h"
 #include "extras/resource_manager.h"
+#include "extras/renderer_manager.h"
+
 #include "SDL3/SDL.h"
 
 #include <stdexcept>
 
 class Entity {
 	public:
-		Entity(const Vector2<float>& position, const Vector2<float>& size, float speed, SDL_Renderer* renderer);
+		Entity(const Vector2<float>& position, const Vector2<float>& size, float speed);
 		virtual ~Entity();
 		virtual void Input(const bool* keyboardState) = 0; // = 0 tells the compiler that this function shouldn't have no implementation
 		virtual void Update(const double& deltaTime) = 0;
@@ -21,5 +23,4 @@ class Entity {
 
 		SDL_Texture* texture;
 
-		SDL_Renderer* renderer;
 };

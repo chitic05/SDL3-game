@@ -1,7 +1,7 @@
 #include "entities/entity.h"
 
-Entity::Entity(const Vector2<float>& position, const Vector2<float>& size, float speed, SDL_Renderer* renderer)
-	: pos(position), dir(0.0f, 0.0f),speed(speed), renderer(renderer), texture(nullptr)
+Entity::Entity(const Vector2<float>& position, const Vector2<float>& size, float speed)
+	: pos(position), dir(0.0f, 0.0f),speed(speed), texture(nullptr)
 	{
 		hitbox = {
 			position.x,

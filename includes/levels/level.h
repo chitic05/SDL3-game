@@ -11,7 +11,7 @@
 
 class Level {
 	public:
-		Level(const std::string& name, SDL_Renderer* renderer);
+		Level(const std::string& name);
 		~Level() = default; 
 		void Load();
 		void Input(const bool* keyboardState);
@@ -25,6 +25,4 @@ class Level {
 		std::unique_ptr<Player> loadPlayer(const nlohmann::json& levelFile);
 
 		nlohmann::json levelFile;
-		
-		SDL_Renderer* renderer;
 };
