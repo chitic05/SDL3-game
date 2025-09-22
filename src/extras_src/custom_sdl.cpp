@@ -39,10 +39,10 @@ SDL_Texture* LoadTexturePNG(const std::string& filePath)
     }
 
     SDL_Texture* rawTexture = SDL_CreateTextureFromSurface(RendererManager::getRenderer(), surface);
-
+    SDL_SetTextureScaleMode(rawTexture, SDL_SCALEMODE_NEAREST);
     // Cleanup
     SDL_DestroySurface(surface);
-
+    stbi_image_free(pixels);
     if (!rawTexture) {
         // Print the SDL error message
         std::string errorMessage = SDL_GetError();

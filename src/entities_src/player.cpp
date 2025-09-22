@@ -1,10 +1,19 @@
 #include "entities/player.h"
 #include <iostream>
 
-Player::Player(const Vector2<float>& position, const Vector2<float>& size, float speed)
-	: Entity(position, size, speed)
+Player::Player(const Vector2<float>& position)
 { 
-	texture = LoadTexturePNG(ResourceManager::GetTexturePath("JimCarrey"));
+	nlohmann::json playerData = ResourceManager::GetEntityData("player");
+	pos = position;
+	speed = playerData["speed"];
+	
+	hitbox = {
+			position.x,
+			position.y,
+			playerData["size"]["x"],
+			playerData["size"]["y"]
+	};
+	texture = LoadTexturePNG(ResourceManager::GetTexturePath(playerData["texture_name"]));
 }
 
 void Player::Input(const bool* keyboardState){
@@ -24,12 +33,13 @@ void Player::Input(const bool* keyboardState){
 }
 
 void Player::Update(const double& deltaTime){
+	std::cout << speed << '\n';
 	pos = pos + dir * speed * static_cast<float>(deltaTime);
 	hitbox.y = pos.y;
 	hitbox.x = pos.x;
 }
 
 void Player::Render(){
-	SDL_SetRenderDrawColor(RendererManager::getRenderer(), 255, 0, 0, 255);
 	SDL_RenderTexture(RendererManager::getRenderer(), texture, nullptr, &hitbox);// WRONG
+	
 }

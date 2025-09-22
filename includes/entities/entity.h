@@ -11,16 +11,15 @@
 
 class Entity {
 	public:
-		Entity(const Vector2<float>& position, const Vector2<float>& size, float speed);
+		Entity();
 		virtual ~Entity();
 		virtual void Input(const bool* keyboardState) = 0; // = 0 tells the compiler that this function shouldn't have no implementation
 		virtual void Update(const double& deltaTime) = 0;
 		virtual void Render() = 0;
 	protected:
-		Vector2<float> pos, dir;
+		Vector2<float> pos, dir{ 0.0f, 0.0f };
 		SDL_FRect hitbox;
 		float speed;
-
-		SDL_Texture* texture;
+		SDL_Texture* texture{ nullptr };
 
 };

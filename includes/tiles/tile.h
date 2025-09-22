@@ -7,7 +7,7 @@
 class Tile {
 	public:
 		Tile(std::string texture_path);
-		~Tile();
+		virtual ~Tile() = default;
 
 	protected:
 		SDL_Texture* texture;

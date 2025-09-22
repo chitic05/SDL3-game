@@ -25,9 +25,7 @@ std::unique_ptr<Player> Level::loadPlayer(const nlohmann::json& levelFile){
 			float x = static_cast<float>(levelFile["player"]["position"][0]);
 			float y = static_cast<float > (levelFile["player"]["position"][1]);
 
-			return std::make_unique<Player>( Vector2<float>(x, y), // pos
-											 Vector2<float>(100, 100), // size
-											 100); // speed 
+			return std::make_unique<Player>(Vector2<float>(x, y)); // pos
 		}
 	} 
 	return nullptr;

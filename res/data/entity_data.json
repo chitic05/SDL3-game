@@ -1,0 +1,10 @@
+{
+  "player": {
+    "speed": 1000,
+    "size": {
+      "x": 300,
+      "y": 100
+    },
+    "texture_name": "JimCarrey"
+  }
+}

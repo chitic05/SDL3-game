@@ -34,6 +34,7 @@ class Vector2 {
 			return Vector2(x * other, y * other);
 		}
 
+
 	private:
 		
 };
