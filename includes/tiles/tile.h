@@ -3,11 +3,12 @@
 #include "SDL3/SDL.h"
 #include "extras/custom_sdl.h"
 #include "extras/resource_manager.h"
+#include "extras/custom_math.hpp"
 #include <string>
 
 class Tile {
 	public:
-		Tile(int x, int y, float size, std::string textureName);
+		Tile(Vector2<float> position, float size, int ID);
 		virtual void Render();
 		virtual ~Tile();
 

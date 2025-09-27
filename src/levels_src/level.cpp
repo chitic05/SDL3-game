@@ -13,7 +13,7 @@ void Level::Load(){
 
 	//Start Loading
 	//LOADING ALL THE OBJECTS FROM THE FILE
-
+	tile = std::make_unique<Tile>(Vector2<float>(2.0f, 3.0f), 40, 2);
 	player = loadPlayer(levelFile);
 }
 
@@ -51,5 +51,5 @@ void Level::Render(){
 		player->Render();
 	}
 
-		
+	tile->Render();
 }
