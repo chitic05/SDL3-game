@@ -3,7 +3,7 @@
 
 Player::Player(const Vector2<float>& position)
 { 
-	nlohmann::json playerData = ResourceManager::GetEntityData("player");
+	nlohmann::json playerData = ResourceManager::Entity::GetEntityData("player");
 	pos = position;
 	speed = playerData["speed"];
 	
@@ -13,33 +13,36 @@ Player::Player(const Vector2<float>& position)
 			playerData["size"]["x"],
 			playerData["size"]["y"]
 	};
-	texture = LoadTexturePNG(ResourceManager::GetTexturePath(playerData["texture_name"]));
+	texture = LoadTexturePNG(ResourceManager::Texture::GetTexturePath(playerData["texture_name"]));
+	
 }
 
-void Player::Input(const bool* keyboardState){
+void Player::Input(){
+	
 	dir = Vector2<float>(0.0f, 0.0f);
-	if (keyboardState[SDL_SCANCODE_W])
+	if (GlobalVar::keyboardState[SDL_SCANCODE_W])
 		dir.y = dir.y + -1.0f;
-	if (keyboardState[SDL_SCANCODE_S])
+	if (GlobalVar::keyboardState[SDL_SCANCODE_S])
 		dir.y = dir.y + 1.0f;
 
-	if (keyboardState[SDL_SCANCODE_A])
+	if (GlobalVar::keyboardState[SDL_SCANCODE_A])
 		dir.x = dir.x + -1.0f;
-	if (keyboardState[SDL_SCANCODE_D])
+	if (GlobalVar::keyboardState[SDL_SCANCODE_D])
 		dir.x = dir.x + 1.0f;
 
 	dir.Normalize();
-	std::cout << dir.x << ' ' << dir.y << std::endl;
+	//std::cout << dir.x << ' ' << dir.y << std::endl;
 }
 
-void Player::Update(const double& deltaTime){
-	std::cout << speed << '\n';
-	pos = pos + dir * speed * static_cast<float>(deltaTime);
+void Player::Update(){
+	std::cout << ResourceManager::Texture::id_to_name[1];
+	//std::cout << speed << '\n';
+	pos = pos + dir * speed * static_cast<float>(GlobalVar::deltaTime);
 	hitbox.y = pos.y;
 	hitbox.x = pos.x;
 }
 
 void Player::Render(){
-	SDL_RenderTexture(RendererManager::getRenderer(), texture, nullptr, &hitbox);// WRONG
+	SDL_RenderTexture(GlobalVar::renderer, texture, nullptr, &hitbox);// WRONG
 	
 }

@@ -15,7 +15,6 @@ void Level::Load(){
 	//LOADING ALL THE OBJECTS FROM THE FILE
 
 	player = loadPlayer(levelFile);
-
 }
 
 std::unique_ptr<Player> Level::loadPlayer(const nlohmann::json& levelFile){
@@ -31,15 +30,19 @@ std::unique_ptr<Player> Level::loadPlayer(const nlohmann::json& levelFile){
 	return nullptr;
 }
 
-void Level::Input(const bool* keyboardState){
+/*std::unique_ptr<TileMap> Level::loadTileMap(const nlohmann::json& levelFile) {
+
+}*/
+
+void Level::Input(){
 	if (player) {
-		player->Input(keyboardState);
+		player->Input();
 	}
 }
 
-void Level::Update(const double& deltaTime) {
+void Level::Update() {
 	if (player) {
-		player->Update(deltaTime);
+		player->Update();
 	}
 }
 
@@ -47,5 +50,6 @@ void Level::Render(){
 	if (player) {
 		player->Render();
 	}
+
 		
 }

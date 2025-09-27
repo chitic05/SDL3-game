@@ -1,0 +1,10 @@
+{
+	"JimCarrey": {
+		"path": "./res/textures/JC.png",
+		"id": 1
+	},
+	"Grass": {
+		"path": "./res/textures/Grass.jpg",
+		"id": 2
+	}
+}

@@ -1,8 +1,14 @@
 #include "tiles/tile.h"
 
-Tile::Tile(std::string texture_path) 
+Tile::Tile(int x, int y, float size, std::string textureName)
 {
-	texture = LoadTexturePNG(texture_path);
+	texture = LoadTexturePNG(ResourceManager::Texture::GetTexturePath(textureName));
+	hitbox = {
+		static_cast<float>(x),
+		static_cast<float>(y),
+		40,
+		40
+	};
 }
 
 Tile::~Tile() {
@@ -11,4 +17,9 @@ Tile::~Tile() {
 		texture = nullptr;
 	}
 		
+}
+
+void Tile::Render()
+{
+	SDL_RenderTexture(GlobalVar::renderer, texture, nullptr, &hitbox);
 }

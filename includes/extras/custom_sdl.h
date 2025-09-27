@@ -1,6 +1,6 @@
 #pragma once
 
-#include "extras/renderer_manager.h"
+#include "extras/global_var.h"
 
 #include "nlohmann/json.hpp"
 #include "stb_image.h"

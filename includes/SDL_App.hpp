@@ -1,7 +1,7 @@
 #include "SDL3/SDL.h"
 #include <iostream>
 #include "levels/level_manager.h"
-#include "extras/renderer_manager.h"
+#include "extras/global_var.h"
 
 class SDLApp {
 public:
@@ -21,13 +21,15 @@ public:
             std::exit(1);
         }
 
-        RendererManager::Init(window);
+        GlobalVar::InitRenderer(window);
+        GlobalVar::InitKeyboard();
+        ResourceManager::Texture::BuildIDMap();
        // SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
     }
 
     // --- DESTROY ---
     ~SDLApp() {
-        RendererManager::Destroy();
+        GlobalVar::Destroy();
         SDL_DestroyWindow(window);
         SDL_Quit();
     }
@@ -41,19 +43,17 @@ public:
         const double targetFPS = 60.0;
         const double targetFrameTime = 1.0 / targetFPS;
 
-        const bool* keyboardState = SDL_GetKeyboardState(NULL);
-
         bool running = true;
         SDL_Event event;
 
         Uint64 now = SDL_GetPerformanceCounter();
         Uint64 last = SDL_GetPerformanceCounter();
-        double deltaTime = 0;
+        
 
         while (running) {
             last = now;
             now = SDL_GetPerformanceCounter();
-            deltaTime = static_cast<double>(now - last) / SDL_GetPerformanceFrequency();
+            GlobalVar::deltaTime = static_cast<double>(now - last) / SDL_GetPerformanceFrequency();
             
 
 
@@ -64,16 +64,16 @@ public:
                 }
             }
 
-            LevelManager::currentLevel->Input(keyboardState);
+            LevelManager::currentLevel->Input();
 
-            LevelManager::currentLevel->Update(deltaTime);
+            LevelManager::currentLevel->Update();
            // --- Rendering ---
-            SDL_SetRenderDrawColor(RendererManager::getRenderer(), 100, 149, 237, 255); // Cornflower blue
-            SDL_RenderClear(RendererManager::getRenderer());
+            SDL_SetRenderDrawColor(GlobalVar::renderer, 100, 149, 237, 255); // Cornflower blue
+            SDL_RenderClear(GlobalVar::renderer);
            
             LevelManager::currentLevel->Render();
 
-            SDL_RenderPresent(RendererManager::getRenderer());
+            SDL_RenderPresent(GlobalVar::renderer);
 
             // --- Frame timing ---
             double frameTime = static_cast<double>(SDL_GetPerformanceCounter() - now) / SDL_GetPerformanceFrequency();/*divide the ticks to the tick frequency to obtain how many second it
@@ -87,5 +87,4 @@ public:
 
 private:
     SDL_Window* window = nullptr;
-    SDL_Renderer* renderer = nullptr;
 };

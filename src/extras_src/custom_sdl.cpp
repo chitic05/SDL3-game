@@ -38,7 +38,7 @@ SDL_Texture* LoadTexturePNG(const std::string& filePath)
         throw std::runtime_error("Failed to create SDL_Surface");
     }
 
-    SDL_Texture* rawTexture = SDL_CreateTextureFromSurface(RendererManager::getRenderer(), surface);
+    SDL_Texture* rawTexture = SDL_CreateTextureFromSurface(GlobalVar::renderer, surface);
     SDL_SetTextureScaleMode(rawTexture, SDL_SCALEMODE_NEAREST);
     // Cleanup
     SDL_DestroySurface(surface);
