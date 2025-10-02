@@ -1,12 +1,12 @@
 #include "tiles/tile.h"
 
-Tile::Tile(Vector2<float> position, float size, int ID)
+Tile::Tile(const Vector2<float>& position, float size, int ID)
 {
-	std::string textureName = ResourceManager::Texture::id_to_name[ID];
-	texture = LoadTexturePNG(ResourceManager::Texture::GetTexturePath(textureName));
+	std::string textureName = Data::Texture::id_to_name[ID];
+	texture = LoadTexturePNG(Data::Texture::GetTexturePath(textureName));
 	hitbox = {
-		position.y *size, // because y represents the collumn, the OX axis
-		position.x *size, // because x represens the row, the OY axis
+		position.y , // because y represents the collumn, the OX axis
+		position.x , // because x represens the row, the OY axis
 		size,
 		size
 	};

@@ -7,7 +7,7 @@
 
 #include "entities/player.h"
 #include "extras/custom_sdl.h"
-#include "tiles/tile.h"
+#include "tiles/tilemap.h"
 
 
 class Level {
@@ -23,10 +23,10 @@ class Level {
 
 	private:
 		std::unique_ptr<Player> player;
-		std::unique_ptr<Tile> tile;
+		std::unique_ptr<TileMap> tileMap;
 		//std::unique_ptr<TileMap> tileMap;
 		std::unique_ptr<Player> loadPlayer(const nlohmann::json& levelFile);
-		//std::unique_ptr<TileMap> loadTileMap(const nlohmann::json& levelFile);
+		std::unique_ptr<TileMap> loadTileMap(const nlohmann::json& levelFile);
 
 		nlohmann::json levelFile;
 };

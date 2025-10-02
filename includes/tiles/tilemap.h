@@ -1,16 +1,18 @@
 #pragma once
 
-#include "tiles/tile.h"
-#include <vector>
+#include "tile.h"
+#include <iostream>
 #include <memory>
-
-using ptr = std::unique_ptr<Tile>;
+#include <stdexcept>
+#include <unordered_map>
+#include <vector>
 
 class TileMap {
 	public:
-		TileMap(int w, int h);
+		TileMap(const nlohmann::json& mapData);
 		void Render();
-
-		std::vector<std::vector<ptr>> tile;
 	private:
+		static std::unordered_map<int, std::function<std::unique_ptr<Tile>(const Vector2<float>&, float, int)>> mapFactory;
+		std::vector<std::unique_ptr<Tile>> tile;
+		int size, rows, cols;
 };

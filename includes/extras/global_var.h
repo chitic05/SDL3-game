@@ -6,6 +6,11 @@
 
 class GlobalVar {
 	public:
+
+		struct Physics {
+			static int gravity;
+		};
+
 		static void InitRenderer(SDL_Window* window);
 		static void GlobalVar::InitKeyboard();
 		static void Destroy();

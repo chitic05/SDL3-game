@@ -13,7 +13,7 @@ void Level::Load(){
 
 	//Start Loading
 	//LOADING ALL THE OBJECTS FROM THE FILE
-	tile = std::make_unique<Tile>(Vector2<float>(2.0f, 3.0f), 40, 2);
+	tileMap = loadTileMap(levelFile);
 	player = loadPlayer(levelFile);
 }
 
@@ -30,9 +30,10 @@ std::unique_ptr<Player> Level::loadPlayer(const nlohmann::json& levelFile){
 	return nullptr;
 }
 
-/*std::unique_ptr<TileMap> Level::loadTileMap(const nlohmann::json& levelFile) {
-
-}*/
+std::unique_ptr<TileMap> Level::loadTileMap(const nlohmann::json& levelFile) {
+	if (levelFile.contains("map") && levelFile["map"].is_object())
+		return std::make_unique<TileMap>(levelFile["map"]);
+}
 
 void Level::Input(){
 	if (player) {
@@ -47,9 +48,12 @@ void Level::Update() {
 }
 
 void Level::Render(){
+	
+	if (tileMap) {
+		tileMap->Render();
+	}
+
 	if (player) {
 		player->Render();
 	}
-
-	tile->Render();
 }

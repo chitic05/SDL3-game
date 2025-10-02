@@ -10,4 +10,6 @@ class Player : public Entity{
 		void Update() override;
 		void Render() override;
 	private:
+		void Physics();
+		void Collisions();
 };

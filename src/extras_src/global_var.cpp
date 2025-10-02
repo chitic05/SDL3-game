@@ -1,5 +1,7 @@
 #include "extras/global_var.h"
 
+int GlobalVar::Physics::gravity = 10;
+
 SDL_Renderer* GlobalVar::renderer = nullptr;
 const bool* GlobalVar::keyboardState = nullptr;
 double GlobalVar::deltaTime = 0;

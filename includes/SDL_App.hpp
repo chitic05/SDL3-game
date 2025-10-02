@@ -23,7 +23,7 @@ public:
 
         GlobalVar::InitRenderer(window);
         GlobalVar::InitKeyboard();
-        ResourceManager::Texture::BuildIDMap();
+        Data::Texture::BuildIDMap();
        // SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
     }
 

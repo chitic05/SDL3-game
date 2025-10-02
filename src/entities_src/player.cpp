@@ -3,7 +3,7 @@
 
 Player::Player(const Vector2<float>& position)
 { 
-	nlohmann::json playerData = ResourceManager::Entity::GetEntityData("player");
+	const nlohmann::json playerData = Data::Entity::GetEntityData("player");
 	pos = position;
 	speed = playerData["speed"];
 	
@@ -13,7 +13,7 @@ Player::Player(const Vector2<float>& position)
 			playerData["size"]["x"],
 			playerData["size"]["y"]
 	};
-	texture = LoadTexturePNG(ResourceManager::Texture::GetTexturePath(playerData["texture_name"]));
+	texture = LoadTexturePNG(Data::Texture::GetTexturePath(playerData["texture_name"]));
 	
 }
 
@@ -35,14 +35,24 @@ void Player::Input(){
 }
 
 void Player::Update(){
-	std::cout << ResourceManager::Texture::id_to_name[1];
 	//std::cout << speed << '\n';
 	pos = pos + dir * speed * static_cast<float>(GlobalVar::deltaTime);
 	hitbox.y = pos.y;
 	hitbox.x = pos.x;
+
+	Physics();
+}
+
+void Player::Physics(){
+	pos.y += GlobalVar::Physics::gravity;
+	Collisions();
+}
+
+void Player::Collisions() {
+
 }
 
 void Player::Render(){
-	SDL_RenderTexture(GlobalVar::renderer, texture, nullptr, &hitbox);// WRONG
+	SDL_RenderTexture(GlobalVar::renderer, texture, nullptr, &hitbox);
 	
 }
