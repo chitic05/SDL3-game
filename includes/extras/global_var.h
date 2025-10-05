@@ -12,7 +12,7 @@ class GlobalVar {
 		};
 
 		static void InitRenderer(SDL_Window* window);
-		static void GlobalVar::InitKeyboard();
+		static void InitKeyboard();
 		static void Destroy();
 
 		static SDL_Renderer* renderer;
