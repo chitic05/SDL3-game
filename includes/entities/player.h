@@ -1,6 +1,7 @@
 #pragma once
 
 #include "entities/entity.h"
+#include "tiles/tilemap.h"
 
 class Player : public Entity{
 	public:
@@ -8,8 +9,8 @@ class Player : public Entity{
 		~Player() override = default;
 		void Input() override;
 		void Update() override;
-		void Render() override;
+		
 	private:
-		void Physics();
-		void Collisions();
+		//void Physics(std::unique_ptr<TileMap> tileMap) override;
+		//void Collision(std::unique_ptr<TileMap> tileMap) override;
 };

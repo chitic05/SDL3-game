@@ -5,6 +5,8 @@
 #include "extras/data_manager.h"
 #include "extras/global_var.h"
 
+#include "tiles/tilemap.h"
+
 #include "SDL3/SDL.h"
 
 #include <stdexcept>
@@ -15,11 +17,21 @@ class Entity {
 		virtual ~Entity();
 		virtual void Input() = 0; // = 0 tells the compiler that this function shouldn't have no implementation
 		virtual void Update() = 0;
-		virtual void Render() = 0;
-	protected:
-		Vector2<float> pos, dir{ 0.0f, 0.0f };
+		virtual void Render();
+		virtual void Physics(TileMap& tileMap);
+
 		SDL_FRect hitbox;
-		float speed;
-		SDL_Texture* texture{ nullptr };
+	protected:
+		virtual void CollisionY(TileMap& tileMap, float velocityY);
+		virtual void CollisionX(TileMap& tileMap, float velocityX);
+
+		Vector2<float> pos, dir{ 0.0f, 0.0f };
+		
+		int speed;
+		int jumpForce;
+		SDL_Texture* texture{nullptr};
+
+		bool isGrounded = false;
+		int fallingVelocity = 0;
 
 };

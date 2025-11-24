@@ -11,10 +11,10 @@ class Tile {
 		Tile(const Vector2<float>& position, float size, int ID);
 		virtual void Render();
 		virtual ~Tile();
-
-	protected:
-		SDL_Texture* texture;
 		SDL_FRect hitbox;
-		bool collidable = true;
+		bool isCollidable = false;
+		int id;
+	protected:
+		SDL_Texture* texture{nullptr};
 		
 };

@@ -10,6 +10,9 @@ Tile::Tile(const Vector2<float>& position, float size, int ID)
 		size,
 		size
 	};
+	id=ID;
+	if(ID > 0 && ID !=4)
+		isCollidable = true;
 }
 
 Tile::~Tile() {
@@ -23,4 +26,6 @@ Tile::~Tile() {
 void Tile::Render()
 {
 	SDL_RenderTexture(GlobalVar::renderer, texture, nullptr, &hitbox);
+	SDL_SetRenderDrawColor(GlobalVar::renderer, 0,0,0,255);
+	SDL_RenderRect(GlobalVar::renderer, &hitbox);
 }

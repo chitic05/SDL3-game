@@ -24,8 +24,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 # Link SDL3 and SDL3_image
 target_link_libraries(${PROJECT_NAME} PRIVATE  SDL3::SDL3)
 
-# Copy resources (optional)
-
 # Copy resources after every build
 file(GLOB_RECURSE MY_RESOURCE_FILES CONFIGURE_DEPENDS
     "${CMAKE_SOURCE_DIR}/res/*"

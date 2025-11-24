@@ -3,7 +3,8 @@
 std::unordered_map<int, std::function<std::unique_ptr<Tile>(const Vector2<float>&, float, int)>> TileMap::mapFactory = {
     {0, [](const Vector2<float>& position, float size, int ID) { return nullptr;}},
     {1, [](const Vector2<float>& position, float size, int ID) { return std::make_unique<Tile>(position, size, 2); }},
-    {3, [](const Vector2<float>& position, float size, int ID) { return std::make_unique<Tile>(position, size, 3); }}
+    {3, [](const Vector2<float>& position, float size, int ID) { return std::make_unique<Tile>(position, size, 3); }},
+    {4, [](const Vector2<float>& position, float size, int ID) { return std::make_unique<Tile>(position, size, 4); }}
 };
 
 //Building the TileMap using constructor 

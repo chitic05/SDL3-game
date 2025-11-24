@@ -1,6 +1,6 @@
 #include "extras/global_var.h"
 
-int GlobalVar::Physics::gravity = 10;
+int GlobalVar::Physics::gravity = 3;
 
 SDL_Renderer* GlobalVar::renderer = nullptr;
 const bool* GlobalVar::keyboardState = nullptr;
@@ -31,6 +31,5 @@ void GlobalVar::Destroy() {
     if (GlobalVar::renderer != nullptr) {
         SDL_DestroyRenderer(GlobalVar::renderer);
         GlobalVar::renderer = nullptr;
-    }
-    else throw std::runtime_error("Renderer is not initialized");
+    }else throw std::runtime_error("Renderer is not initialized");
 }
