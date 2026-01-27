@@ -43,20 +43,22 @@ void Level::Run(){
     if(isLoaded){
         Physics();
 
-        if (!player) return; 
+        // Check again if level is still loaded (in case changeLevel was called)
+        if (!isLoaded || !player) return; 
         Input();
         Update();
     }
 }
 
 void Level::Input(){
-    if (player) {
-        player->Input();
+    if (!isLoaded || !player) {
+        return;
     }
+    player->Input();
 }
 
 void Level::Update() {
-    if (player) {
+    if (isLoaded && player) {
         player->Update();
     }
 }
@@ -72,9 +74,7 @@ void Level::Physics(){
 
 void Level::CheckTriggers() {
     if (!player || !tileMap) return;
-    
-    // REMOVED std::cout here. Printing every frame causes lag.
-    
+        
     int leftCol   = (int)(player->hitbox.x / tileMap->size);
     int rightCol  = (int)((player->hitbox.x + player->hitbox.w) / tileMap->size);
     int topRow    = (int)(player->hitbox.y / tileMap->size);
@@ -96,7 +96,7 @@ void Level::CheckTriggers() {
                 // Safety check: Ensure the JSON actually has a next level defined
                 if (levelFile.contains("nextLevel")) {
                      std::cout << levelFile["nextLevel"] << std::endl;
-                     LevelManager::changeLevel(levelFile["nextLevel"]);
+                     LevelManager::requestLevelChange(levelFile["nextLevel"]);
                 } else {
                      std::cout << "No next level defined in JSON!" << std::endl;
                 }

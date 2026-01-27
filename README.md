@@ -1,6 +1,63 @@
 # SDL3-game
 
-This repository contains a small 2D game written in C++ using SDL3. Levels, tiles and many resources are driven by JSON files in the `res/` folder so you can customize maps and game data without recompiling.
+A 2D platformer game written in C++ using SDL3. Levels, tiles and game data are driven by JSON files in the `res/` folder, allowing easy customization without recompiling.
+
+## 🎮 Quick Start - How to Run the Game
+
+### Prerequisites
+- CMake 3.15 or higher
+- C++17 compatible compiler (GCC, Clang, or MSVC)
+- SDL3 (included in `externals/` folder)
+
+### Building and Running
+
+**On Linux/macOS:**
+```bash
+# 1. Clone the repository
+git clone <your-repo-url>
+cd SDL3-game
+
+# 2. Build the game
+mkdir -p build && cd build
+cmake ..
+cmake --build .
+
+# 3. Run the game (from the build directory)
+./SDL3_Game
+```
+
+**Alternative: Using pre-built executable**
+If you have a pre-built executable in `out/release/`:
+```bash
+cd out/release
+./SDL3_Game
+```
+
+**On Windows:**
+```bash
+# 1. Clone the repository
+git clone <your-repo-url>
+cd SDL3-game
+
+# 2. Build the game
+mkdir build
+cd build
+cmake ..
+cmake --build . --config Release
+
+# 3. Run the game
+.\SDL3_Game.exe
+```
+
+### Controls
+- **A** / **Left Arrow** - Move left
+- **D** / **Right Arrow** - Move right
+- **Space** - Jump
+- **Goal:** Reach the exit tile (black tile) to advance to the next level
+
+### Troubleshooting
+- **Resources not found:** The game expects `res/` folder to be accessible. CMake automatically copies resources to the build directory.
+- **Build errors:** Make sure you have CMake 3.15+ and a C++17 compiler installed.
 
 ## Overview
 - Entry point: `src/main.cpp` constructs `SDLApp` (`includes/SDL_App.hpp`) which initializes SDL, creates the window/renderer and runs the main loop.
@@ -17,21 +74,6 @@ Level layout, textures and entity properties are stored in JSON so designers can
 - Ownership: game objects use `std::unique_ptr` for ownership and lifetime (see `Level` fields).
 - JSON safety: code uses `nlohmann::json` and checks `contains()` and `is_array()`/`is_object()` before accessing keys.
 - Global renderer: `GlobalVar::renderer` must be initialized before calling any rendering or texture-loading functions.
-
-## Build and run (quick)
-From the repository root on Linux:
-
-```bash
-mkdir -p build && cd build
-cmake ..
-cmake --build . --config Release
-# run the built executable (name depends on CMake configuration)
-./SDL3_Game
-```
-
-**Notes:**
-- The code uses relative paths like `./res/levels/<name>.json`. Run the binary from the project root (or ensure `res/` is available relative to your working directory) so loaders find the files.
-- The project includes vendored dependencies in `externals/` (SDL3 and nlohmann::json). If CMake cannot find SDL, install SDL3 on your system or adjust `CMakeLists.txt` to point to the vendored copy.
 
 ## How resources are wired
 - `res/data/texture_data.json` maps texture logical names to file paths and a numeric `id`.

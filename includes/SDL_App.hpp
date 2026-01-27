@@ -72,6 +72,9 @@ public:
 
                 SDL_RenderPresent(GlobalVar::renderer);
 
+                // Process any pending level changes after frame completes
+                LevelManager::processPendingLevelChange();
+
                 // --- Frame timing ---
                 double frameTime = static_cast<double>(SDL_GetPerformanceCounter() - now) / SDL_GetPerformanceFrequency();/*divide the ticks to the tick frequency to obtain how many second it
                                                                                                                         took*/

@@ -1,9 +1,0 @@
-/home/david/Altele/Proiecte/cpp/SDL3-game/build/CMakeFiles/SDL3_Game.dir
-/home/david/Altele/Proiecte/cpp/SDL3-game/build/CMakeFiles/copy_resources.dir
-/home/david/Altele/Proiecte/cpp/SDL3-game/build/CMakeFiles/edit_cache.dir
-/home/david/Altele/Proiecte/cpp/SDL3-game/build/CMakeFiles/rebuild_cache.dir
-/home/david/Altele/Proiecte/cpp/SDL3-game/build/externals/SDL3-3.2.22/CMakeFiles/SDL3-static.dir
-/home/david/Altele/Proiecte/cpp/SDL3-game/build/externals/SDL3-3.2.22/CMakeFiles/SDL3_test.dir
-/home/david/Altele/Proiecte/cpp/SDL3-game/build/externals/SDL3-3.2.22/CMakeFiles/SDL_uclibc.dir
-/home/david/Altele/Proiecte/cpp/SDL3-game/build/externals/SDL3-3.2.22/CMakeFiles/edit_cache.dir
-/home/david/Altele/Proiecte/cpp/SDL3-game/build/externals/SDL3-3.2.22/CMakeFiles/rebuild_cache.dir

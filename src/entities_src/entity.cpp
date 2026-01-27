@@ -34,11 +34,10 @@ void Entity::Physics(TileMap &tileMap)
     }
     hitbox.y += fallingVelocity;
     CollisionY(tileMap, fallingVelocity);
-    printf("%b\n", isGrounded);
 }
 void Entity::CollisionX(TileMap &tileMap, float velocityX)
 {
-    if (velocityX == 0)
+    if (velocityX == 0 || tileMap.size <= 0)
         return;
 
     int leftTile = (int)(hitbox.x / tileMap.size);
@@ -56,6 +55,10 @@ void Entity::CollisionX(TileMap &tileMap, float velocityX)
             hitbox.x = (tileMap.cols * tileMap.size) - hitbox.w;
             return;
         }
+
+        // Check row bounds
+        if (topRow < 0 || topRow >= tileMap.rows || bottomRow < 0 || bottomRow >= tileMap.rows)
+            return;
 
         bool hitTop = tileMap.tile[topRow * tileMap.cols + col] && tileMap.tile[topRow * tileMap.cols + col]->isCollidable;
         bool hitBottom = tileMap.tile[bottomRow * tileMap.cols + col] && tileMap.tile[bottomRow * tileMap.cols + col]->isCollidable;
@@ -75,6 +78,11 @@ void Entity::CollisionX(TileMap &tileMap, float velocityX)
             hitbox.x = 0;
             return;
         }
+
+        // Check row bounds
+        if (topRow < 0 || topRow >= tileMap.rows || bottomRow < 0 || bottomRow >= tileMap.rows)
+            return;
+
         bool hitTop = tileMap.tile[topRow * tileMap.cols + col] && tileMap.tile[topRow * tileMap.cols + col]->isCollidable;
         bool hitBottom = tileMap.tile[bottomRow * tileMap.cols + col] && tileMap.tile[bottomRow * tileMap.cols + col]->isCollidable;
 
@@ -87,6 +95,9 @@ void Entity::CollisionX(TileMap &tileMap, float velocityX)
 
 void Entity::CollisionY(TileMap &tileMap, float velocityY)
 {
+    if (tileMap.size <= 0)
+        return;
+
     int leftCol = (int)(hitbox.x / tileMap.size);
     int rightCol = (int)((hitbox.x + hitbox.w - 0.01f) / tileMap.size); // Small buffer to avoid catching side walls
 
@@ -94,9 +105,13 @@ void Entity::CollisionY(TileMap &tileMap, float velocityY)
     {
         int row = (int)((hitbox.y + hitbox.h) / tileMap.size);
 
-        // Out of bounds chec
-        if (row >= tileMap.rows)
-            return; 
+        // Out of bounds check
+        if (row >= tileMap.rows || row < 0)
+            return;
+
+        // Check column bounds
+        if (leftCol < 0 || leftCol >= tileMap.cols || rightCol < 0 || rightCol >= tileMap.cols)
+            return;
 
         bool hitLeft = tileMap.tile[row * tileMap.cols + leftCol] && tileMap.tile[row * tileMap.cols + leftCol]->isCollidable;
         bool hitRight = tileMap.tile[row * tileMap.cols + rightCol] && tileMap.tile[row * tileMap.cols + rightCol]->isCollidable;
@@ -112,7 +127,11 @@ void Entity::CollisionY(TileMap &tileMap, float velocityY)
     {
         int row = (int)(hitbox.y / tileMap.size);
 
-        if (row < 0)
+        if (row < 0 || row >= tileMap.rows)
+            return;
+
+        // Check column bounds
+        if (leftCol < 0 || leftCol >= tileMap.cols || rightCol < 0 || rightCol >= tileMap.cols)
             return;
 
         bool hitLeft = tileMap.tile[row * tileMap.cols + leftCol] && tileMap.tile[row * tileMap.cols + leftCol]->isCollidable;

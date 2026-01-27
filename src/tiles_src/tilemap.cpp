@@ -28,7 +28,7 @@ TileMap::TileMap(const nlohmann::json& mapData){
             int row = i / cols;
             int col = i % cols;
             i++;
-            tile.push_back(mapFactory[val](Vector2<float>(row* size, col* size), size, val));
+            tile.push_back(mapFactory[val](Vector2<float>(row * size, col * size), size, val));
         }
 
     }

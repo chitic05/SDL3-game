@@ -1,0 +1,18 @@
+{
+	"JimCarrey": {
+		"path": "./res/textures/JC.png",
+		"id": 1
+	},
+	"Grass": {
+		"path": "./res/textures/Grass.jpg",
+		"id": 2
+	},
+	"Cobblestone": {
+		"path": "./res/textures/Cobblestone.jpg",
+		"id": 3
+	},
+	"Black": {
+		"path": "./res/textures/Black.jpg",
+		"id": 4
+	}
+}
