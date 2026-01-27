@@ -24,7 +24,6 @@ cmake --build .
 
 # 3. Run the game (from the build directory)
 ./SDL3_Game
-```
 
 **Alternative: Using pre-built executable**
 If you have a pre-built executable in `out/release/`:
