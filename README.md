@@ -1,6 +1,9 @@
 # SDL3-game
 
-A 2D platformer game written in C++ using SDL3. Levels, tiles and game data are driven by JSON files in the `res/` folder, allowing easy customization without recompiling.
+
+A 2D platformer game written in C++ using SDL3, featuring JSON-driven levels, tiles, and entity configuration. 
+The game uses a modular architecture and a data-driven design to allow content changes without recompiling.
+
 
 ## 🎮 Quick Start - How to Run the Game
 
